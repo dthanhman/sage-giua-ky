@@ -4,7 +4,6 @@
 
 Repo này gom **mọi nội dung có trên slide giữa kỳ**, mỗi ý trên slide đều có chỗ để xem giải thích và bằng chứng (số liệu, hình, code). Không có code huấn luyện mới, không có dữ liệu gốc.
 
-**Slide (Canva, chỉ xem):** _(dán link chỉ xem vào đây)_
 
 ## Đọc gì trước
 

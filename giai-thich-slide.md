@@ -1,6 +1,6 @@
 # Giải thích slide giữa kỳ – nhóm SAGE
 
-Slide: xem link trong [README](README.md) (12 trang). Mọi số là nhóm tự chạy, trừ chỗ ghi "theo bài".
+Slide: 12 trang trên Canva (link gửi riêng trong nhóm). Mọi số là nhóm tự chạy, trừ chỗ ghi "theo bài".
 
 Mỗi slide có 2 phần:
 - **Ý chính:** những gì trên slide.
