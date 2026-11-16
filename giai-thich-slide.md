@@ -52,9 +52,9 @@ Lời nói mẫu nằm ở **cuối file**.
   - Đi thi (chạy thật) chỉ có trò làm bài, nên rất nhanh.
 - **SAM** là mô hình của Meta, tự khoanh vùng mọi vật (người, xe, nhà…) mà không cần biết tên lớp.
 - **3 loss = 3 cách trò học thầy:**
-  - **L_fea:** "nghĩ giống thầy", đặc trưng bên trong giống thầy.
-  - **L_cont:** "bài làm trông giống thầy", cạnh và độ sáng giống ảnh mẫu.
-  - **L_cs:** "hiểu vật thể giống thầy", dùng SAM làm thước đo.
+  - **L_fea (feature):** "nghĩ giống thầy", đặc trưng bên trong giống thầy.
+  - **L_cont (content):** "giữ nội dung ảnh nguồn", ảnh ghép giữ độ sáng (MSE) và cạnh (gradient) của cả VIS lẫn IR.
+  - **L_cs (contrastive):** học đối sánh trong từng vùng vật thể, đo bằng đặc trưng encoder SAM: ảnh của trò phải **gần ảnh của thầy** (mẫu dương) và **xa ảnh nguồn** (mẫu âm: VIS trong vùng mask của VIS, IR trong vùng mask của IR). Công thức: khoảng cách(trò, thầy) / khoảng cách(trò, ảnh nguồn). "Contrastive" là học đối sánh, không phải độ tương phản sáng–tối.
 - **Điểm cần nhớ cho phần sau:** chỉ Teacher có loss phân đoạn (L_seg). Student **không** được học trực tiếp từ nhãn phân đoạn, chỉ học gián tiếp qua thầy và SAM. Ý này dẫn tới RQ1.
 
 ---
