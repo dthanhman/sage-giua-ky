@@ -64,25 +64,25 @@ Lời nói mẫu nằm ở **cuối file**.
 **Ý chính – Các hướng ghép ảnh liên quan** (số theo từng bài)
 - **SegMiF (ICCV 2023):** học ghép ảnh và phân đoạn cùng lúc; tạo bộ dữ liệu FMB. VIS 50,5 → 54,8 mIoU.
 - **SAGE (CVPR 2025):** Teacher dùng SAM, rồi dạy lại Student nhỏ gọn. VIS 49,1 → 61,2.
-- **PIAFusion (2022), AMFusion (2024):** tăng phần ảnh nhiệt khi cảnh tối. Chưa đánh giá bằng phân đoạn (mIoU).
-- **SEA (2024):** chấm ảnh ghép bằng mô hình phân đoạn có sẵn, không train lại. Không có SAGE, không có ghép trung bình.
+- **PIAFusion (2022), AMFusion (2024):** tăng phần ảnh nhiệt khi cảnh tối. Bài gốc không đánh giá phân đoạn trên FMB (AMFusion chỉ đo phát hiện người).
+- **SEA (2024):** đánh giá ảnh ghép bằng mạng phân đoạn có sẵn, không train lại. 30 cách ghép (FMB, MVSeg) đều không hơn chỉ dùng VIS; chưa có ghép trung bình.
 
-**Ý chính – Các bài chấm lại SAGE trên FMB** (cột SAGE − VIS)
+**Ý chính – Các bài khác đo lại SAGE trên FMB** (cột "Hơn SAGE" = mIoU phương pháp của bài đó − mIoU SAGE, trong cùng bài)
 
-| Bài | Mạng phân đoạn | SAGE − VIS |
+| Bài | Mạng phân đoạn | Hơn SAGE |
 |---|---|---|
-| SAGE gốc | SegFormer-B3 | +12,1 |
-| SSVIF (preprint) | SegFormer-B3 | +0,03 |
-| AD-SRF | OverLock-B | +2,5 |
-| P2Fusion | SegFormer-B5 | +1,0 |
-| PCDFusion | SegFormer-B2 | +3,7 |
-| CLDyN | SegFormer-B2 | +5,5 |
+| SSVIF (arXiv 2025) | SegFormer-B3 | +0,03 |
+| AD-SRF (arXiv 2026) | OverLock-B | +2,5 |
+| P2Fusion (arXiv 2026) | SegFormer-B5 | +1,0 |
+| PCDFusion (NeurIPS 2026) | SegFormer-B2 | +3,7 |
+| CLDyN (CVPR 2026) | SegFormer-B2 | +5,5 |
 
-→ Không bài nào gần mức +12,1. Nhóm kiểm lại bằng đúng mạng B3, chạy 3 lần.
+→ Không bài nào đo VIS trên FMB → chưa ai kiểm lại +12,1. Nhóm tự đo VIS và SAGE (SegFormer-B3, 3 lần chạy).
 
 **💡 Hiểu đơn giản**
-- Các bài sau SAGE tự chấm lại thì thấy SAGE chỉ hơn ảnh thường **0–5,5 điểm**, không ai ra 12,1. Đây là lý do nhóm chấm lại cẩn thận.
-- Số trên slide này đều **theo từng bài**, nhóm chưa tự đo.
+- Các bài sau SAGE chỉ so phương pháp mới của họ với SAGE (hơn 0–5,5 điểm). **Không bài nào đo ảnh thường (VIS)**, nên chưa ai kiểm lại con số +12,1. Đây là lý do nhóm tự đo.
+- Số trên slide này đều **theo từng bài**, nhóm chưa tự đo. Mỗi bài một cấu hình, nên chỉ so trong cùng một bài.
+- ⚠ Bản trước (đến 16/11/2026) ghi nhầm cột này là "SAGE − VIS"; đã đối chiếu bảng gốc và sửa.
 
 ---
 
@@ -297,7 +297,7 @@ Lời nói mẫu nằm ở **cuối file**.
 
 | Câu hỏi | Trả lời |
 |---|---|
-| Vậy bài báo sai à? | Không kết luận vậy. Nhóm chỉ chưa tái lập được +12,1 với cấu hình của mình. Bài không công bố code chấm và chỉ ghi 2/10 mục cấu hình. Các bài khác chấm lại cũng chỉ ra 0–5,5 (slide 3). |
+| Vậy bài báo sai à? | Không kết luận vậy. Nhóm chỉ chưa tái lập được +12,1 với cấu hình của mình. Bài không công bố code chấm và chỉ ghi 2/10 mục cấu hình. Các bài sau SAGE chưa ai đo lại VIS trên FMB, nên chưa ai kiểm được +12,1 (slide 3). |
 | Sao chắc nhóm không làm sai? | Slide 6, cột "Đã kiểm lỗi": ảnh SAGE trùng ảnh tác giả (tương quan 0,9999), VIS khớp bài trên 7 lớp, code chấm viết 2 bản khớp 100%, 3 lần chạy. |
 | Sao so công bằng? | Cùng mạng chấm B3, cùng cấu hình, cùng 273 ảnh, cùng 3 seed. Chỉ khác ảnh đầu vào. |
 | Leakage xử lý thế nào? | FMB: bỏ 7 ảnh test rò, báo trên 273 ảnh (có báo cả 280). Dev cắt theo khối. SemanticRT: chia lại theo góc máy. |
