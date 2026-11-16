@@ -67,22 +67,23 @@ Lời nói mẫu nằm ở **cuối file**.
 - **PIAFusion (2022), AMFusion (2024):** tăng phần ảnh nhiệt khi cảnh tối. Bài gốc không đánh giá phân đoạn trên FMB (AMFusion chỉ đo phát hiện người).
 - **SEA (2024):** đánh giá ảnh ghép bằng mạng phân đoạn có sẵn, không train lại. 30 cách ghép (FMB, MVSeg) đều không hơn chỉ dùng VIS; chưa có ghép trung bình.
 
-**Ý chính – Các bài khác đo lại SAGE trên FMB** (cột "Hơn SAGE" = mIoU phương pháp của bài đó − mIoU SAGE, trong cùng bài)
+**Ý chính – Các bài sau có đo SAGE trên FMB** (số theo từng bài)
 
-| Bài | Mạng phân đoạn | Hơn SAGE |
+| Bài | Mạng phân đoạn | mIoU SAGE |
 |---|---|---|
-| SSVIF (arXiv 2025) | SegFormer-B3 | +0,03 |
-| AD-SRF (arXiv 2026) | OverLock-B | +2,5 |
-| P2Fusion (arXiv 2026) | SegFormer-B5 | +1,0 |
-| PCDFusion (NeurIPS 2026) | SegFormer-B2 | +3,7 |
-| CLDyN (CVPR 2026) | SegFormer-B2 | +5,5 |
+| SSVIF (arXiv 2025) | SegFormer-B3 | 62,0 |
+| AD-SRF (arXiv 2026) | OverLock-B | 61,4 |
+| P2Fusion (arXiv 2026) | SegFormer-B5 | 56,5 |
+| PCDFusion (NeurIPS 2026) | SegFormer-B2 | 56,3 |
+| CLDyN (CVPR 2026) | SegFormer-B2 | 54,9 |
 
-→ Không bài nào đo VIS trên FMB → chưa ai kiểm lại +12,1. Nhóm tự đo VIS và SAGE (SegFormer-B3, 3 lần chạy).
+→ Cùng là SAGE, mIoU dao động 54,9 → 62,0 tùy cấu hình (dẫn sang slide 6). Không bài nào đo VIS → chưa ai kiểm lại +12,1 → nhóm tự đo (slide 7).
 
 **💡 Hiểu đơn giản**
-- Các bài sau SAGE chỉ so phương pháp mới của họ với SAGE (hơn 0–5,5 điểm). **Không bài nào đo ảnh thường (VIS)**, nên chưa ai kiểm lại con số +12,1. Đây là lý do nhóm tự đo.
-- Số trên slide này đều **theo từng bài**, nhóm chưa tự đo. Mỗi bài một cấu hình, nên chỉ so trong cùng một bài.
-- ⚠ Bản trước (đến 16/11/2026) ghi nhầm cột này là "SAGE − VIS"; đã đối chiếu bảng gốc và sửa.
+- Các bài sau SAGE chỉ dùng SAGE làm đối thủ để so với phương pháp mới của họ. **Không bài nào đo ảnh thường (VIS)**, nên chưa ai kiểm lại con số +12,1. Đây là lý do nhóm tự đo.
+- Cùng một SAGE mà mỗi bài ra một số khác (lệch tới 7 điểm) → cấu hình đánh giá ảnh hưởng rất lớn → nhóm ghi đủ cấu hình (slide 6).
+- Số trên slide này đều **theo từng bài**, nhóm chưa tự đo.
+- ⚠ Bản trước (đến 16/11/2026) có cột ghi nhầm là "SAGE − VIS" (thật ra là "phương pháp của bài − SAGE"); đã đối chiếu bảng gốc và sửa.
 
 ---
 
@@ -158,7 +159,7 @@ Lời nói mẫu nằm ở **cuối file**.
 | Số lớp khi train | 15 lớp (tính cả nền chưa gán nhãn) | Không |
 | Dữ liệu train | Đủ 1.220 ảnh train chính thức | Có |
 | Số vòng | 100 epoch (15.200 vòng), batch 8 | Chỉ epoch |
-| Tối ưu | AdamW, lr 6e-5, warmup 1.500, poly | Không |
+| Tối ưu | AdamW, lr 6e-5, warmup 1.500, poly | Không rõ (bài chỉ ghi chung "Adam is adopted for training", không rõ cho SegFormer) |
 | Tăng cường | Phóng to/thu nhỏ, cắt 512, lật ngang | Không |
 | Chọn mô hình | Lấy bản cuối, không chọn theo test | Không |
 | Đánh giá | Nguyên ảnh 600×800, 273 ảnh, 13 lớp | Không |
